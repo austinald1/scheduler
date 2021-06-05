@@ -1,4 +1,11 @@
 var tasks = {};
+document.getElementById("today-is").innerText = moment().format("[Today is] dddd");
+var hour = moment().format("HH"); 
+console.log(hour);
+var taskSection = document.getElementsByClassName("color-code");
+// for(var counter = 0; counter < taskSection.length; counter++){
+
+// }
 
 var createTask = function(taskText, taskDate, taskList) {
   // create elements that make up a task item
