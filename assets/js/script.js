@@ -1,11 +1,20 @@
 var tasks = {};
+//var 
 document.getElementById("today-is").innerText = moment().format("[Today is] dddd");
-var hour = moment().format("HH"); 
+var hour = +moment().format("HH");
+var loopHour = 9;
 console.log(hour);
 var taskSection = document.getElementsByClassName("color-code");
-// for(var counter = 0; counter < taskSection.length; counter++){
-
-// }
+for(var counter = 0; counter < taskSection.length; counter++){
+  if(loopHour < hour){
+    taskSection[counter].style.backgroundColor = "grey"
+  } else if(loopHour == hour){
+    taskSection[counter].style.backgroundColor = "red"
+  } else if(loopHour > hour){
+    taskSection[counter].style.backgroundColor = "green"
+  }
+  loopHour++;
+}
 
 var createTask = function(taskText, taskDate, taskList) {
   // create elements that make up a task item
