@@ -15,7 +15,34 @@ for(var counter = 0; counter < taskSection.length; counter++){
   }
   loopHour++;
 }
-
+function loadTasks(){
+  tasks = JSON.parse(localStorage.getItem("tasks"));
+  if (!tasks) {
+    tasks = {
+      toDo: [{
+        9: "",
+        10: "",
+        11: "",
+        12: "",
+        13: "",
+        14: "",
+        15: "",
+        16: "",
+        17: "",
+      }]
+    }
+  }
+  console.log(tasks)
+}
+function saveLocalStorage(time){
+ var inputValue = document.getElementById(time).value;
+ console.log(inputValue);
+ tasks.toDo[0][time] = inputValue;
+ console.log(tasks); 
+}
+var saveTasks = function() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};
 var createTask = function(taskText, taskDate, taskList) {
   // create elements that make up a task item
   var taskLi = $("<li>").addClass("list-group-item");
@@ -33,37 +60,6 @@ var createTask = function(taskText, taskDate, taskList) {
   // append to ul list on the page
   $("#list-" + taskList).append(taskLi);
 };
-
-var loadTasks = function() {
-  tasks = JSON.parse(localStorage.getItem("tasks"));
-
-  // if nothing in localStorage, create a new object to track all task status arrays
-  if (!tasks) {
-    tasks = {
-      toDo: [],
-      inProgress: [],
-      inReview: [],
-      done: []
-    };
-  }
-
-  // loop over object properties
-  $.each(tasks, function(list, arr) {
-    console.log(list, arr);
-    // then loop over sub-array
-    arr.forEach(function(task) {
-      createTask(task.text, task.date, list);
-    });
-  });
-};
-
-var saveTasks = function() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-};
-
-
-
-
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function() {
   // clear values
